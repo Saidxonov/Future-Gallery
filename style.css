@@ -1,0 +1,110 @@
+/* author: https://codepen.io/argyleink/pen/dyLNgpX
+Adam Argyle */
+@import "https://unpkg.com/open-props/easings.min.css";
+
+@layer demo.view-transition {
+  ::view-transition-group(*) {
+    animation-duration: .5s;
+    animation-timing-function: var(--ease-5);
+  }
+  
+  .hub > * {
+    @media (prefers-reduced-motion: no-preference) {
+      &:nth-child(1) {
+        view-transition-name: gallery-item-1;
+      }
+      &:nth-child(2) {
+        view-transition-name: gallery-item-2;
+      }
+      &:nth-child(3) {
+        view-transition-name: gallery-item-3;
+      }
+      &:nth-child(4) {
+        view-transition-name: gallery-item-4;
+      }
+      &:nth-child(5) {
+        view-transition-name: gallery-item-5;
+      }
+      &:nth-child(6) {
+        view-transition-name: gallery-item-6;
+      }
+      &:nth-child(7) {
+        view-transition-name: gallery-item-7;
+      }
+    }
+}
+
+@layer demo.layout {
+  .hub {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, 15vw);
+    grid-template-rows: repeat(3, 15vw);
+    
+    &.portrait {
+      grid-template-columns: repeat(3, 20vw);
+      grid-template-rows: repeat(5, 20vw);
+    }
+    
+
+    > :has(:checked) {
+      grid-column: 1 / 4;
+      grid-row: 1 / 4;
+    }
+
+    > * {
+      display: grid;
+      
+      > * {
+        grid-area: 1/1;
+      }
+      
+      > label {
+        opacity: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      > input {
+        border-radius: 0;
+        outline-offset: 5px;
+        outline-color: deeppink;
+        outline-color: color(display-p3 1 0 1);
+      } 
+    }
+  }
+}
+
+@layer demo.support {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html {
+    block-size: 100%;
+    color-scheme: dark light;
+  }
+
+  body {
+    min-block-size: 100%;
+    font-family: system-ui, sans-serif;
+
+    display: grid;
+    place-content: center;
+  }
+  
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  img {
+    max-inline-size: 100%;
+  }
+  
+  html {
+    view-transition-name: none;
+  }
+}
